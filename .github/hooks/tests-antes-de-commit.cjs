@@ -10,7 +10,7 @@ if (!/git\s+commit/.test(evento)) {
 }
 
 const windows = process.platform === 'win32';
-const pruebas = spawnSync(windows ? 'mvnw.cmd' : './mvnw', ['-q', 'test'], { encoding: 'utf8', shell: windows });
+const pruebas = spawnSync(windows ? '.\\mvnw.cmd -q test' : './mvnw -q test', { encoding: 'utf8', shell: true });
 
 if (pruebas.status === 0) {
   process.stdout.write('{}');
