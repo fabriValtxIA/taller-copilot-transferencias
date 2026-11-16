@@ -31,5 +31,9 @@ terminada con un comando en rojo.**
 2. `./mvnw -q test` (incluye `NormasDelRepoTest`, que rechaza `double`).
 3. `./mvnw -q verify` (build completo).
 
+## Estado entre sesiones
+- Al empezar, lee `PROGRESS.md` y el plan que indique (`docs/planes/`).
+- Al terminar cada tarea, actualiza `PROGRESS.md` (Hecho / En curso / Bloqueado).
+
 Si una norma choca con el código existente, corrige el código existente.
 Para agregar una regla de negocio, sigue la skill `regla-de-negocio`.
