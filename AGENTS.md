@@ -4,7 +4,7 @@ Servicio REST que transfiere dinero entre cuentas de clientes del banco.
 Todos los datos del repo son sintéticos.
 
 ## Stack
-- Java 21, Spring Boot 3.5.9, Maven 3.9 (usar siempre el wrapper `./mvnw`).
+- Java 21, Spring Boot 3.5.9, Maven 3.9 (usar siempre el wrapper `./mvnw`; en Windows `mvnw.cmd`).
 - Persistencia con `JdbcTemplate` sobre H2 en memoria (`schema.sql`, `data.sql`).
 - Paquete único: `com.taller.transferencias`.
 
