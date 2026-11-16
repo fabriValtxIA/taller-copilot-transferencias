@@ -23,5 +23,13 @@ Todos los datos del repo son sintéticos.
 4. **Una prueba por cada regla de negocio.** Cada validación nueva lleva al
    menos una prueba que la acepte y otra que la rechace.
 
+## Verificación
+Ejecuta estos comandos antes de dar por terminada cualquier tarea. Si alguno
+falla, lee el error, corrige y vuelve a ejecutar. **Ninguna tarea está
+terminada con un comando en rojo.**
+1. `./mvnw -q compile` (compila con `-Xlint:all -Werror`: cero advertencias).
+2. `./mvnw -q test` (incluye `NormasDelRepoTest`, que rechaza `double`).
+3. `./mvnw -q verify` (build completo).
+
 Si una norma choca con el código existente, corrige el código existente.
 Para agregar una regla de negocio, sigue la skill `regla-de-negocio`.
