@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 /** Verificación automática de la norma 2: el dinero nunca va en double/float. */
 class NormasDelRepoTest {
 
-    private static final Pattern TIPO_FLOTANTE = Pattern.compile("\b(double|Double|float|Float|DOUBLE|FLOAT|REAL)\b");
+    private static final Pattern TIPO_FLOTANTE = Pattern.compile("\\b(double|Double|float|Float|DOUBLE|FLOAT|REAL)\\b");
 
     @Test
     void ningun_archivo_de_produccion_usa_tipos_flotantes() throws IOException {
