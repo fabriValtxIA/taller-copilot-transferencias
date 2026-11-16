@@ -31,6 +31,15 @@ public class BancoRepository {
         jdbc.update("UPDATE cuenta SET saldo = ? WHERE numero = ?", saldo, numero);
     }
 
+    public double totalTransferidoHoy(String documento) {
+        Double total = jdbc.queryForObject(
+                "SELECT COALESCE(SUM(t.monto), 0) FROM transferencia t "
+                        + "JOIN cuenta c ON t.cuenta_origen = c.numero "
+                        + "WHERE c.documento = ? AND CAST(t.fecha AS DATE) = CURRENT_DATE",
+                Double.class, documento);
+        return total != null ? total : 0;
+    }
+
     public void guardarTransferencia(String origen, String destino, double monto) {
         jdbc.update("INSERT INTO transferencia (cuenta_origen, cuenta_destino, monto, fecha) VALUES (?, ?, ?, ?)",
                 origen, destino, monto, LocalDateTime.now());
