@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "banco-sqlite": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-sqlite", "--db-path", "${workspaceFolder}/demo-mcp/banco.db"]
+    }
+  }
+}

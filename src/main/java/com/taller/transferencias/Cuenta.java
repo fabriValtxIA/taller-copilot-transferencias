@@ -1,4 +1,6 @@
 package com.taller.transferencias;
 
-public record Cuenta(String numero, String documento, double saldo) {
+import java.math.BigDecimal;
+
+public record Cuenta(String numero, String documento, BigDecimal saldo) {
 }
