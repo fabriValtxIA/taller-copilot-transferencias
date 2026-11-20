@@ -28,6 +28,7 @@ public class TransferenciaService {
 
         validarMonto(monto);
         validarSaldo(origen, monto);
+        validarLimiteDiario(origen, monto);
 
         repository.actualizarSaldo(origen.numero(), origen.saldo() - monto);
         repository.actualizarSaldo(destino.numero(), destino.saldo() + monto);
@@ -47,6 +48,18 @@ public class TransferenciaService {
             log.warn("Saldo insuficiente: cuenta={} cliente={} saldo={} monto={}",
                     origen.numero(), origen.documento(), origen.saldo(), monto);
             throw new TransferenciaRechazadaException("Saldo insuficiente");
+        }
+    }
+
+    private void validarLimiteDiario(Cuenta origen, double monto) {
+        Cliente cliente = repository.buscarCliente(origen.documento())
+                .orElseThrow(() -> new TransferenciaRechazadaException("Cliente no existe"));
+        double transferidoHoy = repository.obtenerMontoTransferidoHoy(origen.documento());
+
+        if (transferidoHoy + monto > cliente.limiteDiario()) {
+            log.warn("Límite diario excedido: cliente={} transferidoHoy={} monto={} limite={}",
+                    origen.documento(), transferidoHoy, monto, cliente.limiteDiario());
+            throw new TransferenciaRechazadaException("Límite diario excedido");
         }
     }
 }

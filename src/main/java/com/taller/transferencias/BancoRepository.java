@@ -35,4 +35,13 @@ public class BancoRepository {
         jdbc.update("INSERT INTO transferencia (cuenta_origen, cuenta_destino, monto, fecha) VALUES (?, ?, ?, ?)",
                 origen, destino, monto, LocalDateTime.now());
     }
+
+    public double obtenerMontoTransferidoHoy(String documento) {
+        return jdbc.queryForObject("""
+                SELECT COALESCE(SUM(t.monto), 0)
+                FROM transferencia t
+                JOIN cuenta c ON c.numero = t.cuenta_origen
+                WHERE c.documento = ? AND CAST(t.fecha AS DATE) = CURRENT_DATE
+                """, Double.class, documento);
+    }
 }
