@@ -1,5 +1,6 @@
 package com.taller.transferencias;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/transferencias")
 public class TransferenciaController {
 
-    public record TransferenciaRequest(String cuentaOrigen, String cuentaDestino, double monto) {
+    public record TransferenciaRequest(String cuentaOrigen, String cuentaDestino, BigDecimal monto) {
     }
 
     private final TransferenciaService service;
