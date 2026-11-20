@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "banco-sqlite": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-sqlite", "--db-path", "demo-mcp/banco.db"],
+      "tools": ["list_tables", "describe_table", "read_query"]
+    }
+  }
+}

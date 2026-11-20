@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "command": "node .github/hooks/inyectar-agents.cjs",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}
