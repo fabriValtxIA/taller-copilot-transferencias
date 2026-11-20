@@ -1,5 +1,6 @@
 package com.taller.transferencias;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -25,6 +26,19 @@ public class BancoRepository {
         return jdbc.query("SELECT documento, nombre, limite_diario FROM cliente WHERE documento = ?",
                 (rs, i) -> new Cliente(rs.getString("documento"), rs.getString("nombre"), rs.getDouble("limite_diario")),
                 documento).stream().findFirst();
+    }
+
+    public double totalTransferidoHoy(String documento) {
+        LocalDateTime inicioDia = LocalDate.now().atStartOfDay();
+        LocalDateTime inicioDiaSiguiente = inicioDia.plusDays(1);
+
+        return jdbc.queryForObject("""
+                SELECT COALESCE(SUM(t.monto), 0)
+                FROM transferencia t
+                JOIN cuenta c ON c.numero = t.cuenta_origen
+                WHERE c.documento = ? AND t.fecha >= ? AND t.fecha < ?
+                """,
+                Double.class, documento, inicioDia, inicioDiaSiguiente);
     }
 
     public void actualizarSaldo(String numero, double saldo) {
